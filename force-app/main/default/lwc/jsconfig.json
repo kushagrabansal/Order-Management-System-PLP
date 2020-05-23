@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/crudComp": [
+                "crudComp/crudComp.js"
+            ],
+            "c/crudComp2": [
+                "crudComp2/crudComp2.js"
+            ],
+            "c/crudComp3": [
+                "crudComp3/crudComp3.js"
+            ],
+            "c/crudComp4Parent": [
+                "crudComp4Parent/crudComp4Parent.js"
+            ],
+            "c/crudComp4Child": [
+                "crudComp4Child/crudComp4Child.js"
+            ],
+            "c/child": [
+                "child/child.js"
+            ],
+            "c/parent": [
+                "parent/parent.js"
+            ],
+            "c/childO": [
+                "childO/childO.js"
+            ],
+            "c/prodSearch": [
+                "prodSearch/prodSearch.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

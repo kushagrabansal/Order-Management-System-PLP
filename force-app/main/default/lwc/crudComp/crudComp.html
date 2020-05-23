@@ -1,0 +1,23 @@
+<template>
+    <lightning-record-form
+        object-api-name={orderObject}
+        fields={myFields}
+        onsuccess={handleAccountCreated}>
+    </lightning-record-form>
+
+<template for:each={orders} for:item="ord" for:index="i">
+     <lightning-card key={ord.Id}>
+     Account Id is {ord.AccountId} | &nbsp;&nbsp;
+     Order Number is {ord.OrderNumber} | &nbsp;&nbsp;
+     Total Amount is {ord.TotalAmount} | &nbsp;&nbsp; 
+     Order Id is {ord.Id} | &nbsp;&nbsp;
+     
+  <button class="slds-button slds-button_brand" value={i} onclick={navigateToRecordViewPage} >VIEW ORDER</button>&nbsp;&nbsp;&nbsp;
+   
+</lightning-card> 
+</template>
+
+
+
+
+</template>

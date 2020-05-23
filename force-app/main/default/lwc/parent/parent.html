@@ -1,0 +1,19 @@
+<template>
+
+
+    <template for:each={orders} for:item="ord" for:index="i">
+        <lightning-card key={ord.Id} title={ord.OrderNumber} >
+       
+        Total Amount is {ord.TotalAmount} | &nbsp;&nbsp; 
+        Order Id is {ord.Id} | &nbsp;&nbsp;
+        <button class="slds-button slds-button_brand" onclick={appfun} value={i}>APPROVE ORDER</button>&nbsp;&nbsp;&nbsp;
+      
+        <c-child-o get-id-from-parent={ord.Id}
+        object-api-name={objectApiName} ></c-child-o>
+
+       
+   </lightning-card> 
+    </template>
+
+    
+</template>

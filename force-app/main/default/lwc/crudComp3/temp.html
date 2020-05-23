@@ -1,0 +1,67 @@
+<template>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <!-- Your lightning-output-field components here -->
+            <lightning-input type="string" placeholder="Search by Product Name" value={searchKey_name} onchange={handleKeyNameChange}></lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <!-- Your lightning-output-field components here -->
+            <lightning-input type="string" placeholder="Search by Product Brand" value={searchKey_brand} onchange={handleKeyBrandChange}></lightning-input>
+        </div>
+        <!-- <div class="slds-col slds-size_1-of-3">
+            Your lightning-output-field components here 
+            <lightning-input type="string" placeholder="Search by Product MRP"></lightning-input>
+        </div> -->
+    </div>
+    <br><br>
+    <template for:each={orderprods} for:item="ord" for:index="i">
+        <lightning-card key={ord.Brand__c}>
+          Brand is {ord.Brand__c} | &nbsp;&nbsp; Product Name is
+          {ord.Product_Name__c} | &nbsp;&nbsp; Product Code is
+          {ord.Product_Code__c} | &nbsp;&nbsp; Quantity is {ord.Quantity} |
+          &nbsp;&nbsp; Stock_Quantity__c is {ord.Stock_Quantity__c} | &nbsp;&nbsp;
+        </lightning-card>
+      </template>
+    </template>
+  
+  
+  
+  
+  <!-- <template>
+      <lightning-input type="text" label="Enter the product" value={prodsearch} onchange={getresults}></lightning-input>
+  -->
+      <!-- <lightning-input type="text" ></lightning-input> -->
+      
+      <!-- <template if:true={showOriginal}>
+      <template for:each={orderprods} for:item="ord" for:index="i">
+        <lightning-card key={ord.Brand__c}>
+          Brand is {ord.Brand__c} | &nbsp;&nbsp; Product Name is
+          {ord.Product_Name__c} | &nbsp;&nbsp; Product Code is
+          {ord.Product_Code__c} | &nbsp;&nbsp; Quantity is {ord.Quantity} |
+          &nbsp;&nbsp; Stock_Quantity__c is {ord.Stock_Quantity__c} | &nbsp;&nbsp;
+        </lightning-card>
+      </template>
+      
+      <lightning-input type="text" value="order prods" ></lightning-input>
+    </template>
+  
+    <template if:true={showResults}>
+      <div class="first-class" >
+          <lightning-input class="second-class" ></lightning-input>
+          <lightning-input class="second-class" ></lightning-input>
+          <lightning-input class="second-class" ></lightning-input>
+      </div> -->
+  <!--      keep cmmnted begins  
+       <template for:each={orderresults} for:item="ord" for:index="i">
+        <lightning-card key={ord.Brand__c}>
+          Brand is {ord.Brand__c} | &nbsp;&nbsp; Product Name is
+          {ord.Product_Name__c} | &nbsp;&nbsp; Product Code is
+          {ord.Product_Code__c} | &nbsp;&nbsp; Quantity is {ord.Quantity} |
+          &nbsp;&nbsp; Stock_Quantity__c is {ord.Stock_Quantity__c} | &nbsp;&nbsp;
+        </lightning-card>
+      </template> 
+    keep cmmnted ends -->
+      <!-- <lightning-input type="text" value="order results" ></lightning-input> 
+    </template>
+  </template> -->
+  

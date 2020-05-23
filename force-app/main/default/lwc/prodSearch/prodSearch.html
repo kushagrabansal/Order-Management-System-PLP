@@ -1,0 +1,221 @@
+<template>
+      SEARCH prodcuts and ADD 
+      <lightning-card  title="SEARCH AND ADD">
+        <p class="slds-p-horizontal_small">   SEARCH prodcuts and ADD them to your order
+        </p>
+     </lightning-card>
+    
+    <!-- <lightning-input type="text"></lightning-input> -->
+    <template if:true={isShowAdd}>
+       
+        <lightning-card  title=" Select your order" >
+            <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+                <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="ORDER NUMBER">ORDER NUMBER</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="ADD TO THIS ORDER">ADD TO THIS ORDER</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="CANCEL OPERATION">CANCEL OPERATION</div>
+                    </th>
+               
+                </tr>
+                </thead>
+                <tbody>
+                      <template for:each={orderList} for:item="ord" for:index="i">
+                            <tr key={ord.Id} class="slds-hint-parent">
+                                <td data-label="ORDER NUMBER">
+                                <div class="slds-truncate" >{ord.OrderNumber}</div>
+                                </td>
+                                <td data-label="ADD TO THIS ORDER">
+                               <div class="slds-truncate" >
+                                  <lightning-button label="ADD" onclick={selectOrder} value = {ord.Id}>{ord.OrderNumber}</lightning-button>
+                     </div>  </td>
+                                <td data-label="CANCEL OPERATION">
+                                 <div class="slds-truncate" >
+                                       
+                  <lightning-button 
+                  class="slds-m-top_small"
+                  type = "reset" 
+                  label= "Cancel" 
+                  onclick={handleClose}></lightning-button>    
+                   </div>
+                                </td>
+                               
+                            </tr>
+                    </template>        
+                </tbody>
+                </table>
+                  
+       </lightning-card> 
+        
+    </template>
+
+
+    <template if:true={isShowAdd1}>
+        <lightning-card  title="NO PRICEBOOK ASSOCIATED">
+            <p class="slds-p-horizontal_small">Go to the record page of this order , select a price book and then only can you add a product</p>
+            
+        </lightning-card>
+        
+
+    </template>
+
+
+    
+    <template if:true={isShowAdd2}>
+        <lightning-card  title="SCAN PRICEBOOK">
+            <lightning-button label= "CHECK"  onclick={checkProd} value = {product_id} slot="actions"></lightning-button>
+            <p class="slds-p-horizontal_small"> Click on the check button to check if the product exists in the pricebook associated with your order
+            </p>
+         </lightning-card>
+     </template>
+     
+    
+    <template if:true={isShowAdd3}>
+        <lightning-card  title="ADD FINAL">
+            <lightning-button label= "ADD FINAL"  onclick={addFinal} value = {product_id} slot="actions"></lightning-button>
+            <p class="slds-p-horizontal_small">  The products available , click the button to add it in your order
+            </p>
+         </lightning-card>
+     
+     </template>
+
+     
+    
+    <template if:true={isShowAdd4}>
+        <lightning-card  title="NOT AVAILABLE">
+            <p class="slds-p-horizontal_small">   THE PRODUCT IS NOT AVAILABLE IN THE PRICEBOOK ASSOCIATED WITH YOUR ORDER
+                Try with a different product that is present in the pricebook you selected
+               </p>
+         </lightning-card>
+     
+     </template>
+
+
+
+
+      <template if:true={isShowAdd5}>
+          <lightning-record-edit-form object-api-name="OrderItem" onsuccess={handleSuccess} onerror={handleError} value={sentOrderId}>
+              <lightning-input-field field-name="OrderId" value={ordId} >
+              </lightning-input-field>
+              <lightning-input-field field-name="Product2Id" value={product_id} readonly disabled>
+              </lightning-input-field>
+              <lightning-input-field field-name="UnitPrice" value={unitprice} readonly disabled>
+              </lightning-input-field>
+              <lightning-input-field field-name="Quantity" >
+              </lightning-input-field>
+              <lightning-input-field  field-name="PricebookEntryId" value={pricebookentryid} hidden readonly>
+              </lightning-input-field>
+              <lightning-button 
+              class="slds-m-top_small" 
+              variant="brand" 
+              type="submit" 
+              name="add" 
+              label="Add">
+              </lightning-button>
+              <lightning-button 
+              class="slds-m-top_small"
+              type = "reset" 
+              label= "Cancel" 
+              onclick={handleClose5}></lightning-button>
+          </lightning-record-edit-form>
+      </template> 
+      <br><br>
+    
+      <div class="slds-grid">
+          <div class="slds-col slds-size_1-of-2">
+              <!-- Your lightning-output-field components here -->
+              <lightning-input type="string" placeholder="Search by Product Name" value={searchKey_name} onchange={handleKeyNameChange}></lightning-input>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+              <!-- Your lightning-output-field components here -->
+              <lightning-input type="string" placeholder="Search by Product Brand" value={searchKey_brand} onchange={handleKeyBrandChange}></lightning-input>
+          </div>
+          <!-- <div class="slds-col slds-size_1-of-3">
+              Your lightning-output-field components here 
+              <lightning-input type="string" placeholder="Search by Product MRP"></lightning-input>
+          </div> -->
+      </div>
+      <br><br>
+      <template if:true={isshow}>
+          <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+              <thead>
+              <tr class="slds-line-height_reset">
+                  <th class="" scope="col">
+                  <div class="slds-truncate" title="Product Name">Product Name</div>
+                  </th>
+                  <th class="" scope="col">
+                  <div class="slds-truncate" title="Product Code">Product Code</div>
+                  </th>
+                  <th class="" scope="col">
+                  <div class="slds-truncate" title="Brand Name">Brand Name</div>
+                  </th>
+                  <th class="" scope="col">
+                  <div class="slds-truncate" title="Stock Quantity">Stock Quantity</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="Stock Quantity">Add Product</div>
+                  </th>
+              </tr>
+              </thead>
+              <tbody>
+                  <template for:each={products} for:item="product" >
+                          <tr key = {abc} class="slds-hint-parent">
+                              <td data-label="Product Name">
+                              <div class="slds-truncate" >{product.Name}</div>
+                              </td>
+                              <td data-label="Close Date">
+                              <div class="slds-truncate" >{product.ProductCode}</div>
+                              </td>
+                              <td data-label="Prospecting">
+                              <div class="slds-truncate" >{product.Brand__c}</div>
+                              </td>
+                              <td data-label="Confidence">
+                              <div class="slds-truncate" >{product.Stock_Quantity__c}</div>
+                              </td>
+                              <td data-label="Confidence">
+                                  <div class="slds-truncate" >
+                                      <lightning-button label=Add onclick={handleAdd} value = {product.Id}></lightning-button>
+                                  </div>
+                              </td>
+                          </tr>
+                  </template>        
+              </tbody>
+              </table>
+          
+      </template><br>
+      <lightning-button 
+              class="slds-m-top_small" 
+              variant="brand"  
+              name="continue" 
+              label="Continue">
+              </lightning-button>
+    </template>
+    <!--       
+    <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+      <thead>
+      <tr class="slds-line-height_reset">
+          <th class="" scope="col">
+          <div class="slds-truncate" title="Product Name">Product Details</div>
+          </th>
+      </tr>
+      </thead>
+      
+      <template for:each={products} for:item="product" for:index="i">
+        <lightning-card key={product.Brand__c}>
+          Brand is {product.Brand__c} | &nbsp;&nbsp; Product Name is
+          {product.Name} | &nbsp;&nbsp; Product Code is
+          {product.ProductCode} | &nbsp;&nbsp;  Stock_Quantity__c is {product.Stock_Quantity__c} | &nbsp;&nbsp;
+          <div class="slds-truncate" ><lightning-button variant="brand" label=Add onclick={handleAdd} value = {product.Id}></lightning-button></div>
+                     
+        </lightning-card>
+      </template>
+      </table> -->
+    
+    
+    
+    

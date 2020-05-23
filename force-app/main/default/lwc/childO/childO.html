@@ -1,0 +1,50 @@
+
+
+<template>
+  <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+    <thead>
+    <tr class="slds-line-height_reset">
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Product Name">Product Name</div>
+        </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Product Code">Product Code</div>
+        </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Brand Name">Brand Name</div>
+        </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Stock Quantity">Stock Quantity</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Stock Quantity">Add Product</div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <template for:each={orderprods} for:item="ord" for:index="i">
+                <tr key = {abc} class="slds-hint-parent">
+                    <td data-label="Product Name">
+                    <div class="slds-truncate" >{ord.Product_Name__c}</div>
+                    </td>
+                    <td data-label="Close Date">
+                    <div class="slds-truncate" >{ord.Product_Code__c}</div>
+                    </td>
+                    <td data-label="Prospecting">
+                    <div class="slds-truncate" >{ord.Brand__c}</div>
+                    </td>
+                    <td data-label="Confidence">
+                    <div class="slds-truncate" > {ord.Stock_Quantity__c}</div>
+                    </td>
+                    <td data-label="Confidence">
+                        <div class="slds-truncate" >
+                             <button class="slds-button slds-button_destructive" value={i} onclick={delData}>DELETE PRODUCT</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </td>
+                </tr>
+        </template>        
+    </tbody>
+    </table>
+
+
+</template>
